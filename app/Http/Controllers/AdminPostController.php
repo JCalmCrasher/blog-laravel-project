@@ -38,7 +38,7 @@ class AdminPostController extends Controller
 
         $isSaved ? $request->session()->flash('post_status', 'Post inserted successfully!') : abort('500', 'Eroor');
         
-        redirect('admin/posts', 200);
+        redirect('admin/posts');
     }
 
     public function show(Post $post)
