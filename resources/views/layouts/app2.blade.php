@@ -19,7 +19,7 @@
 
   <!-- Custom styles for this template-->
   <link href="{{ asset('assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
-  
+
   <link href="{{ asset('vendor/bootstrap/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 
 </head>
@@ -51,14 +51,27 @@
       </li>
 
       <!-- Divider -->
-      <hr class="sidebar-divider">
       <li class="nav-item active">
-        <a class="nav-link" href="{{ url('admin/posts') }}">
-          <i class="fas fa-newspaper" aria-hidden="true"></i>
-          <span>Posts</span></a>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+          aria-controls="collapseTwo">
+          <i class="fas fa-newspaper"></i>
+          <span>Posts</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class=" py-2 collapse-inner rounded">
+            <a class="nav-link" href="{{ url('admin/posts/') }}">
+              <i class="fas fa-newspaper" aria-hidden="true"></i>
+              <span style="font-weight: 400">Posts</span>
+            </a>
+            <a class="nav-link" href="{{ url('admin/posts/') }}">
+              <i class="fa fa-tasks" aria-hidden="true"></i>
+              <span style="font-weight: 400">Categories</span>
+            </a>
+          </div>
+        </div>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="/admin/comments">
+        <a class="nav-link" href="/admin/comments/">
           <i class="fas fa-comments" aria-hidden="true"></i>
           <span>Comment</span></a>
       </li>
@@ -114,10 +127,14 @@
                   Profile
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                   Logout
                 </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                  @csrf
+                </form>
               </div>
             </li>
 

@@ -24,7 +24,7 @@ Route::get('/services', function () {
     return view('services');
 });
 
-// Post routes
+// Post routes (Homepage)
 Route::group([], function () {
     Route::get('/', 'PostController@index');
 
@@ -32,6 +32,7 @@ Route::group([], function () {
 
     Route::get('/posts/{id}', 'PostController@show');
 });
+
 
 // Admin routes
 Route::group(['prefix' => 'admin'], function () {
@@ -43,13 +44,17 @@ Route::group(['prefix' => 'admin'], function () {
         return view('admin.home');
     });
 
-    Route::get('/posts', 'AdminPostController@index');
-
-    Route::get('/create', 'AdminPostController@create');
-
-    Route::post('/posts', 'AdminPostController@store');
-
     Auth::routes();
 
     Route::get('/home', 'DashboardController@index')->name('home');
 });
+
+// Admin Post routes
+Route::resource('admin/posts', 'AdminPostController');
+
+
+// Admin Comment routes
+// Route::resource('admin/comment', 'AdminCommentController');
+
+// Admin Users routes
+// Route::resource('admin/users', 'AdminUsersController');

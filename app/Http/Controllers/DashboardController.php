@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -23,6 +24,10 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('admin.home');
+        $posts = count(Post::all());
+        // $comments = Comment::all();
+        // $users = User::all();
+
+        return view('admin.home', compact('posts'));
     }
 }

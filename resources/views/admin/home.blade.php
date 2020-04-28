@@ -17,7 +17,7 @@
                                 Number of Posts
                             </div>
                             <div class="h5 mb-0 font-weight-bold text-primary-800">
-                                100
+                                {{ $posts }}
                             </div>
                         </div>
                         <div class="col-auto">

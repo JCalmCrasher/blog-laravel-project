@@ -23,24 +23,36 @@ Post
                     </ul>
                 </div>
                 @endif
-                <form action="{{ url('admin/posts') }}" method="post">
+                <form action="{{ url('admin/posts/') }}" method="post">
                     @csrf
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="post-title">Enter Post Title</label>
-                                <input type="text" {{ old('post_title') }} id="post-title" name="post_title" class="form-control">
+                                <input type="text" {{ old('post_title') }} id="post-title" name="post_title"
+                                    class="form-control">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="post-title">Enter Post Excerpt</label>
-                                <input type="text" {{ old('post_excerpt') }} id="post-excerpt" name="post_excerpt" class="form-control">
+                                <input type="text" {{ old('post_excerpt') }} id="post-excerpt" name="post_excerpt"
+                                    class="form-control">
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="category">Enter Post Category</label>
+                                <select id="category" name="category" class="form-control" {{ old('category') }}>
+                                    @foreach ($posts as $post)
+                                        <option value="{{ $post->category }}">{{ $post->category }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-6">
                             <div class="form-group">
                                 <label for="post-body">Enter Post Body</label>
                                 <textarea name="post_body" {{ old('post_body') }} id="post-body" cols="30" rows="5"

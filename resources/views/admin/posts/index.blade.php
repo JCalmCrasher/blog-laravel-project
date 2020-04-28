@@ -7,7 +7,7 @@ Blog - Posts
 Posts
 @endsection
 @section('button')
-<a href="{{ url('admin/create') }}" class="btn btn-primary" id="add-post">Add New Post</a>
+<a href="{{ url('admin/posts/create') }}" class="btn btn-primary" id="add-post">Add New Post</a>
 @endsection
 @section('content')
 <div class="row">
@@ -17,6 +17,11 @@ Posts
                 <h6 class="m-0 font-weight-bold text-primary">All posts</h6>
             </div>
             <div class="card-body">
+                @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+                @endif
                 <div class="table-responsive">
                     <table id="postTable" class="table table-hover" style="width: 100%;">
                         <thead>
@@ -24,6 +29,7 @@ Posts
                                 <th>Title</th>
                                 <th>Excerpt</th>
                                 <th>Body</th>
+                                <th>Category</th>
                                 <th>Author</th>
                                 <th>Date</th>
                                 <th style="width:6rem !important">Action</th>
@@ -35,10 +41,20 @@ Posts
                                 <td>{{ $post->post_title }}</td>
                                 <td>{{ $post->post_excerpt }}</td>
                                 <td>{{ $post->post_body }}</td>
+                                <td>{{ $post->category }}</td>
                                 <td><span class="btn badge badge-primary text-white"
                                         id="add-post">{{ $post->creator }}</span></td>
                                 <td>{{ $post->created_at }}</td>
-                                <td><a class="btn btn-success btn-sm" data-toggle="modal" data-target="#edit-post-modal" href="{{ url("admin/$post->id") }}">Edit</a> <a class="btn btn-danger btn-sm" href="{{ url("admin/$post->id") }}">Delete</a></td>
+                                <td>
+                                    <a class="btn btn-success btn-sm" href="{{ "posts/$post->id/edit" }}">Edit</a>
+                                    <a class="btn btn-danger btn-sm" href="posts/delete" onclick="event.preventDefault();
+                                    document.getElementById('delete-form').submit();">Delete</a>
+                                    <form id="delete-form" action="posts/delete" method="POST"
+                                        style="display: none;">
+                                        @method('DELETE')
+                                        @csrf
+                                    </form>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

@@ -25,8 +25,6 @@
                 <!-- Date/Time -->
                 <p>Posted on {{ date('F d, Y', strtotime($post->created_at)) }}</p>
 
-                <hr>
-
                 <!-- Preview Image -->
                 <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
 
