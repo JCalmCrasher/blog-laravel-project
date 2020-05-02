@@ -33,10 +33,10 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                Number of Comment
+                                Number of Comments
                             </div>
                             <div class="h5 mb-0 font-weight-bold text-warning-800">
-                                100
+                                {{ $comments }}
                             </div>
                         </div>
                         <div class="col-auto">
@@ -55,7 +55,7 @@
                                 Number of Users
                             </div>
                             <div class="h5 mb-0 font-weight-bold text-info-800">
-                                100
+                                {{ $users }}
                             </div>
                         </div>
                         <div class="col-auto">

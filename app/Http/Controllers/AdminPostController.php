@@ -11,9 +11,7 @@ class AdminPostController extends Controller
 {
     public function index()
     {
-        if (!Auth::user()) {
-            return redirect()->action('PostController@index');
-        }
+        $this->redirectIfNotLoggedIn();
         $posts = Post::orderBy('created_at', 'desc')->get();
 
         return view('admin.posts.index', ['posts' => $posts]);
@@ -21,11 +19,15 @@ class AdminPostController extends Controller
 
     public function create(PostCategory $category)
     {
+        $this->redirectIfNotLoggedIn();
+
         return view('admin.posts.create', ['posts' => $category->all()]);
     }
 
     public function store(Request $request)
     {
+        $this->redirectIfNotLoggedIn();
+
         $request->validate([
             'post_title' => 'required|unique:posts',
             'post_excerpt' => 'required',
@@ -52,6 +54,8 @@ class AdminPostController extends Controller
 
     public function edit(Post $post)
     {
+        $this->redirectIfNotLoggedIn();
+
         $postCategory = PostCategory::where('category', $post->category)->get();
         $selectedCategory = [$postCategory[0]->category];
 
@@ -62,6 +66,8 @@ class AdminPostController extends Controller
 
     public function update(Request $request, $id)
     {
+        $this->redirectIfNotLoggedIn();
+
         $request->validate([
             'post_title' => 'required|unique:posts',
             'post_excerpt' => 'required',
@@ -69,7 +75,7 @@ class AdminPostController extends Controller
             'category' => 'required',
         ]);
 
-        $post = Post::find($request->post_id);
+        $post = Post::find($id);
         $post->post_title = $request->post_title;
         $post->post_excerpt = $request->post_excerpt;
         $post->post_body = $request->post_body;
@@ -81,9 +87,20 @@ class AdminPostController extends Controller
         return redirect()->action('AdminPostController@index')->with('success', 'Post successfully updated');
     }
 
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        return $request;
-        //
+        $this->redirectIfNotLoggedIn();
+
+        $post = Post::find($id);
+        $post->delete();
+
+        return redirect()->action('AdminPostController@index')->with('success', 'Post successfully deleted');
+    }
+
+    public function redirectIfNotLoggedIn()
+    {
+        if (!Auth::user()) {
+            die(redirect()->action('PostController@index'));
+        }
     }
 }

@@ -133,6 +133,10 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        
+        'commenter_name' => [
+            'required' => 'Please enter your name',
+        ],
     ],
 
     /*

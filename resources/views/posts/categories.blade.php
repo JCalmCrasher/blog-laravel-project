@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 @section('title')
-Larablog - Home
+Larablog - {{ $category }}
 @endsection
 
 @section('container')
@@ -10,7 +10,7 @@ Larablog - Home
         <div class="col-md-8">
             @foreach($posts as $post)
             <h1 class="display-4" style="font-size: 2em">
-                <a href="posts/{{ $post->id }}">{{ $post->post_title }}</a>
+                <a href="{{ url("posts/$post->id ") }}">{{ $post->post_title }}</a>
             </h1>
 
             <!-- Blog Post -->
@@ -18,12 +18,12 @@ Larablog - Home
                 <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap" />
                 <div class="card-body">
                     <h2 class="card-title lead">
-                        <a href="posts/{{ $post->id }}">{{ $post->post_excerpt }}</a>
+                        <a href="{{ url("posts/$post->id ") }}">{{ $post->post_excerpt }}</a>
                     </h2>
                     <p class="card-text">
                         {{ $post->post_body }}
                     </p>
-                    <a href="posts/{{ $post->id }}" class="btn btn-primary">Read More &rarr;</a>
+                    <a href="{{ url("posts/$post->id ") }}" class="btn btn-primary">Read More &rarr;</a>
                 </div>
                 <div class="card-footer text-muted">
                     Posted on
@@ -32,7 +32,6 @@ Larablog - Home
                 </div>
             </div>
             @endforeach
-            {{ $posts->links() }}
         </div>
 
         <!-- Sidebar Widgets Column -->
@@ -48,8 +47,7 @@ Larablog - Home
                                     <ul class="list-unstyled mb-0">
                                         @foreach($categories as $post)
                                         <li>
-                                            <a
-                                                href="{{ url("posts/category/".strtolower($post->category)) }}">{{ $post->category }}
+                                            <a href="{{ url("posts/category/".strtolower($post->category)) }}">{{ $post->category }}
                                             </a>
                                         </li>
                                         @endforeach
@@ -67,11 +65,11 @@ Larablog - Home
                         <h5 class="card-header lead">Recent Posts</h5>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-lg-12">
                                     <ul class="list-unstyled mb-0">
                                         @foreach($recentPosts as $recentPost)
                                         <li>
-                                            <a href="posts/{{ $recentPost->id }}">{{ $recentPost->post_title }}</a>
+                                            <a href="{{ url("posts/$recentPost->id") }}">{{ $recentPost->post_title }}</a>
                                         </li>
                                         @endforeach
                                     </ul>

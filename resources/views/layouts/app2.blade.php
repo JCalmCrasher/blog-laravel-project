@@ -63,7 +63,7 @@
               <i class="fas fa-newspaper" aria-hidden="true"></i>
               <span style="font-weight: 400">Posts</span>
             </a>
-            <a class="nav-link" href="{{ url('admin/posts/') }}">
+            <a class="nav-link" href="{{ url('admin/categories/') }}">
               <i class="fa fa-tasks" aria-hidden="true"></i>
               <span style="font-weight: 400">Categories</span>
             </a>
@@ -73,7 +73,7 @@
       <li class="nav-item active">
         <a class="nav-link" href="/admin/comments/">
           <i class="fas fa-comments" aria-hidden="true"></i>
-          <span>Comment</span></a>
+          <span>Comments</span></a>
       </li>
 
       <li class="nav-item active">
@@ -122,11 +122,11 @@
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Profile
-                </a>
                 <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{{ url("admin/profile") }}">
+                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                  My profile
+                </a>
                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>

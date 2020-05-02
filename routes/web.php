@@ -31,7 +31,12 @@ Route::group([], function () {
     Route::get('/index', 'PostController@index');
 
     Route::get('/posts/{id}', 'PostController@show');
+
+    Route::get('posts/category/{id}', 'PostCategoryController');
 });
+
+// Comment route
+Route::post('comments', 'CommentController');
 
 
 // Admin routes
@@ -44,17 +49,24 @@ Route::group(['prefix' => 'admin'], function () {
         return view('admin.home');
     });
 
+    // Post routes
+    Route::resource('posts', 'AdminPostController');
+
+    // Category routes
+    Route::resource('categories', 'AdminPostCategoryController');
+
+    // User routes
+    Route::resource('users', 'AdminUserController');
+
+    // User profile route
+    Route::get('profile', function () {
+        return 'hey';
+    });
+
+    // Comment route
+    Route::resource('comments', 'AdminCommentController');
+
     Auth::routes();
 
     Route::get('/home', 'DashboardController@index')->name('home');
 });
-
-// Admin Post routes
-Route::resource('admin/posts', 'AdminPostController');
-
-
-// Admin Comment routes
-// Route::resource('admin/comment', 'AdminCommentController');
-
-// Admin Users routes
-// Route::resource('admin/users', 'AdminUsersController');

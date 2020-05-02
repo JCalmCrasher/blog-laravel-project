@@ -1,20 +1,17 @@
 @extends('layouts.app2')
 @section('title')
-Blog - Posts
+Blog - Categories
 @endsection
 
 @section('page-title')
-Posts
-@endsection
-@section('button')
-    <a href="{{ url('admin/posts/create') }}" class="btn btn-primary" id="add-post">Add New Post</a>
+Categories
 @endsection
 @section('content')
 <div class="row">
     <div class="col-12">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">All posts</h6>
+                <h6 class="m-0 font-weight-bold text-primary">All categories</h6>
             </div>
             <div class="card-body">
                 @if (session('success'))
@@ -22,34 +19,32 @@ Posts
                     {{ session('success') }}
                 </div>
                 @endif
+                @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+                @endif
                 <div class="table-responsive">
                     <table id="postTable" class="table table-hover" style="width: 100%;">
                         <thead>
                             <tr role="row">
-                                <th>Title</th>
-                                <th>Excerpt</th>
-                                <th>Body</th>
                                 <th>Category</th>
-                                <th>Author</th>
+                                <th>Created by</th>
                                 <th>Date</th>
                                 <th style="width:6rem !important">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($posts as $post)
+                            @foreach ($categories as $category)
                             <tr>
-                                <td>{{ $post->post_title }}</td>
-                                <td>{{ $post->post_excerpt }}</td>
-                                <td>{{ $post->post_body }}</td>
-                                <td>{{ $post->category }}</td>
-                                <td><span class="btn badge badge-primary text-white"
-                                        id="add-post">{{ $post->creator }}</span></td>
-                                <td>{{ $post->created_at }}</td>
+                                <td>{{ $category->category }}</td>
+                                <td>{{ $category->creator }}</td>
+                                <td>{{ $category->created_at }}</td>
                                 <td>
-                                    <a class="btn btn-success btn-sm" href="{{ "posts/$post->id/edit" }}">Edit</a>
-                                    <a class="btn btn-danger btn-sm" href="posts/delete" onclick="event.preventDefault();
+                                    <a class="btn btn-success btn-sm" href="{{ "categories/$category->id/edit" }}">Edit</a>
+                                    <a class="btn btn-danger btn-sm" href="categories/delete" onclick="event.preventDefault();
                                     document.getElementById('delete-form').submit();">Delete</a>
-                                    <form id="delete-form" action="{{ url("admin/posts/$post->id") }}" method="POST"
+                                    <form id="delete-form" action="{{ url("admin/posts/$category->id") }}" method="POST"
                                         style="display: none;">
                                         @method('DELETE')
                                         @csrf
