@@ -36,9 +36,9 @@ Users
                         </div>
                         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group">
-                                <label for="password">Enter Password</label>
-                                <input type="password" {{ old('password') }} id="password" name="password"
-                                    class="form-control" value="{{ $user->password }}">
+                                <label for="email">Enter Email</label>
+                                <input type="email" {{ old('email') }} id="email" name="email"
+                                    class="form-control" value="{{ $user->email }}">
                             </div>
                         </div>
                     </div>

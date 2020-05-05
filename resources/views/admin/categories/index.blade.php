@@ -6,6 +6,9 @@ Blog - Categories
 @section('page-title')
 Categories
 @endsection
+@section('button')
+    <a href="{{ url('admin/categories/create') }}" class="btn btn-primary" id="add-category">Add New Category</a>
+@endsection
 @section('content')
 <div class="row">
     <div class="col-12">
@@ -44,7 +47,7 @@ Categories
                                     <a class="btn btn-success btn-sm" href="{{ "categories/$category->id/edit" }}">Edit</a>
                                     <a class="btn btn-danger btn-sm" href="categories/delete" onclick="event.preventDefault();
                                     document.getElementById('delete-form').submit();">Delete</a>
-                                    <form id="delete-form" action="{{ url("admin/posts/$category->id") }}" method="POST"
+                                    <form id="delete-form" action="{{ url("admin/categories/$category->id") }}" method="POST"
                                         style="display: none;">
                                         @method('DELETE')
                                         @csrf

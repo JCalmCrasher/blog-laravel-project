@@ -11,7 +11,6 @@ class AdminPostController extends Controller
 {
     public function index()
     {
-        $this->redirectIfNotLoggedIn();
         $posts = Post::orderBy('created_at', 'desc')->get();
 
         return view('admin.posts.index', ['posts' => $posts]);
@@ -19,15 +18,11 @@ class AdminPostController extends Controller
 
     public function create(PostCategory $category)
     {
-        $this->redirectIfNotLoggedIn();
-
         return view('admin.posts.create', ['posts' => $category->all()]);
     }
 
     public function store(Request $request)
     {
-        $this->redirectIfNotLoggedIn();
-
         $request->validate([
             'post_title' => 'required|unique:posts',
             'post_excerpt' => 'required',
@@ -47,15 +42,8 @@ class AdminPostController extends Controller
         return redirect()->action('AdminPostController@index')->with('success', 'Post successfully created');
     }
 
-    public function show(Post $post)
-    {
-        //
-    }
-
     public function edit(Post $post)
     {
-        $this->redirectIfNotLoggedIn();
-
         $postCategory = PostCategory::where('category', $post->category)->get();
         $selectedCategory = [$postCategory[0]->category];
 
@@ -66,10 +54,8 @@ class AdminPostController extends Controller
 
     public function update(Request $request, $id)
     {
-        $this->redirectIfNotLoggedIn();
-
         $request->validate([
-            'post_title' => 'required|unique:posts',
+            'post_title' => 'required|exists:posts',
             'post_excerpt' => 'required',
             'post_body' => 'required',
             'category' => 'required',
@@ -89,18 +75,9 @@ class AdminPostController extends Controller
 
     public function destroy($id)
     {
-        $this->redirectIfNotLoggedIn();
-
         $post = Post::find($id);
         $post->delete();
 
         return redirect()->action('AdminPostController@index')->with('success', 'Post successfully deleted');
-    }
-
-    public function redirectIfNotLoggedIn()
-    {
-        if (!Auth::user()) {
-            die(redirect()->action('PostController@index'));
-        }
     }
 }

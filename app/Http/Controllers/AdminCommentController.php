@@ -46,9 +46,6 @@ class AdminCommentController extends Controller
 
     public function update(Request $request, $id)
     {
-        // return $id;
-        $this->redirectIfNotLoggedIn();
-
         $comment = Comment::where('id', $id)->get();
         if ($comment[0]->approved == 0) {
             $isApproved = Comment::where('id', $id)->update(['approved' => 1]);

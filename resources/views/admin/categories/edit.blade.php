@@ -1,17 +1,17 @@
 @extends('layouts.app2')
 @section('title')
-Blog - Create New Post
+Blog - Create New Category
 @endsection
 
 @section('page-title')
-Post
+Category
 @endsection
 @section('content')
 <div class="row">
     <div class="col-12">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Add New Post</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Add New Category</h6>
             </div>
             <div class="card-body">
                 @if ($errors->any())
@@ -23,50 +23,20 @@ Post
                     </ul>
                 </div>
                 @endif
-                <form action="{{ url("admin/posts/$post->id") }}" method="post">
+                <form action="{{ url("admin/categories/$categories->id") }}" method="post">
                     @method('PUT')
                     @csrf
-                    <input type="text" {{ old('post_id') }} id="post-id" name="post_id" class="form-control"
-                        value="{{ $post->id }}" hidden>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-12">
                             <div class="form-group">
-                                <label for="post-title">Enter Post Title</label>
-                                <input type="text" {{ old('post_title') }} id="post-title" name="post_title"
-                                    class="form-control" value="{{ $post->post_title }}">
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="post-excerpt">Enter Post Excerpt</label>
-                                <input type="text" {{ old('post_excerpt') }} id="post-excerpt" name="post_excerpt"
-                                    class="form-control" value="{{ $post->post_excerpt }}">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="category">Enter Post Category</label>
-                                <select id="category" name="category" class="form-control" {{ old('category') }}>
-                                    @foreach ($categories as $cat)
-                                    <option value="{{ $cat->category }}"
-                                        {{ ( $cat->category == $selectedCategory[0]) ? 'selected' : '' }}>
-                                        {{ $cat->category }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="post-body">Enter Post Body</label>
-                                <textarea name="post_body" {{ old('post_body') }} id="post-body" cols="30" rows="5"
-                                    class="form-control">{{ $post->post_body }}</textarea>
+                                <label for="category">Enter Category</label>
+                                <input type="text" {{ old('category') }} id="category" name="category"
+                                    class="form-control" value="{{ $categories->category }}">
                             </div>
                         </div>
                     </div>
                     <div class="col-12">
-                        <button type="submit" class="btn btn-primary">Update Post</button>
+                        <button type="submit" class="btn btn-primary">Update Category</button>
                     </div>
                 </form>
             </div>

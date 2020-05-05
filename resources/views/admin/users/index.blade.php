@@ -44,9 +44,9 @@ Users
                                 <td>{{ $user->created_at }}</td>
                                 <td>
                                     <a class="btn btn-success btn-sm" href="{{ "users/$user->id/edit" }}">Edit</a>
-                                    <a class="btn btn-danger btn-sm" href="users/delete" onclick="event.preventDefault();
-                                    document.getElementById('delete-form').submit();">Delete</a>
-                                    <form id="delete-form" action="{{ url("admin/users/$user->id") }}" method="POST"
+                                    <a class="btn btn-danger btn-sm" href="users/{{ $user->id }}/delete" onclick="event.preventDefault();
+                                    document.getElementById('{{ $user->id }}-form').submit();">Delete</a>
+                                    <form id="{{ $user->id }}-form" action="{{ url("admin/users/$user->id") }}" method="POST"
                                         style="display: none;">
                                         @method('DELETE')
                                         @csrf

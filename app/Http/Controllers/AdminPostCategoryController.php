@@ -10,7 +10,6 @@ class AdminPostCategoryController extends Controller
 {
     public function index()
     {
-        $this->redirectIfNotLoggedIn();
         $categories = PostCategory::orderBy('created_at', 'desc')->get();
 
         return view('admin.categories.index', ['categories' => $categories]);
@@ -18,15 +17,11 @@ class AdminPostCategoryController extends Controller
 
     public function create(PostCategory $category)
     {
-        $this->redirectIfNotLoggedIn();
-
         return view('admin.categories.create');
     }
 
     public function store(Request $request)
     {
-        $this->redirectIfNotLoggedIn();
-
         $request->validate([
             'category' => 'required|unique:category',
         ]);
@@ -45,21 +40,17 @@ class AdminPostCategoryController extends Controller
         //
     }
 
-    public function edit(PostCategory $postCategory)
+    public function edit($id)
     {
-        $this->redirectIfNotLoggedIn();
+        $categories = PostCategory::where('id', $id)->get()[0];
 
-        $categories = PostCategory::where('category', $postCategory->category)->get();
-
-        return view('admin.posts.edit', compact('categories'));
+        return view('admin.categories.edit', compact('categories'));
     }
 
     public function update(Request $request, $id)
     {
-        $this->redirectIfNotLoggedIn();
-
         $request->validate([
-            'category' => 'required|unique:category',
+            'category' => 'required|exists:category',
         ]);
 
         $postCategory = PostCategory::find($id);
@@ -73,18 +64,10 @@ class AdminPostCategoryController extends Controller
 
     public function destroy($id)
     {
-        $this->redirectIfNotLoggedIn();
+        $postCategory = PostCategory::find($id);
 
-        $postCategory = postCategoryCategory::find($id);
         $postCategory->delete();
 
-        return redirect()->action('AdminPostController@index')->with('success', 'Post successfully deleted');
-    }
-
-    public function redirectIfNotLoggedIn()
-    {
-        if (!Auth::user()) {
-            die(redirect()->action('PostController@index'));
-        }
+        return redirect()->action('AdminPostCategoryController@index')->with('success', 'Post Category successfully deleted');
     }
 }

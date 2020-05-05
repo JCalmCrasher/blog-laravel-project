@@ -35,8 +35,8 @@ User
                         </div>
                         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group">
-                                <label for="password">Enter Password</label>
-                                <input type="password" {{ old('password') }} id="password" name="password"
+                                <label for="email">Enter Email</label>
+                                <input type="email" {{ old('email') }} id="email" name="email"
                                     class="form-control">
                             </div>
                         </div>
@@ -53,15 +53,6 @@ User
                             <div class="form-group">
                                 <label for="lastname">Enter Lastname</label>
                                 <input type="text" {{ old('lastname') }} id="lastname" name="lastname"
-                                    class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label for="email">Enter Email</label>
-                                <input type="text" {{ old('email') }} id="email" name="email"
                                     class="form-control">
                             </div>
                         </div>

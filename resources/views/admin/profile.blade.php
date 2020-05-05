@@ -28,7 +28,7 @@ Profile
                     {{ session('success') }}
                 </div>
                 @endif
-                <form action='{{ url("admin/profile/$profile->id") }}' method="POST">
+                <form action='{{ url("admin/profile/$profile->id") }}' method="POST" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
                     <div class="row">
@@ -60,29 +60,6 @@ Profile
                                 <label for="email">Email</label>
                                 <input type="text" {{ old('email') }} id="email" name="email" class="form-control"
                                     value="{{ $profile->email }}">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12 col-md-12 col-lg-6">
-                            <div class="form-group">
-                                <label for="current-password">Current Password</label>
-                                <input type="password" id="current-password" name="current_password"
-                                    class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-12 col-lg-3">
-                            <div class="form-group">
-                                <label for="password">New Password</label>
-                                <input type="password" id="password" name="password"
-                                    class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-12 col-lg-3">
-                            <div class="form-group">
-                                <label for="confirm-password">Confirm Password</label>
-                                <input type="password" id="confirm-password" name="password_confirmation"
-                                    class="form-control">
                             </div>
                         </div>
                     </div>

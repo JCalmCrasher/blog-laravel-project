@@ -9,9 +9,10 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminUserController extends Controller
 {
+    private $default_password = '123456';
+
     public function index()
     {
-        $this->redirectIfNotLoggedIn();
         $users = User::orderBy('created_at', 'desc')->get();
 
         return view('admin.users.index', ['users' => $users]);
@@ -19,22 +20,17 @@ class AdminUserController extends Controller
 
     public function create(User $user)
     {
-        $this->redirectIfNotLoggedIn();
-
         return view('admin.users.create', ['users' => $user->all()]);
     }
 
     public function store(Request $request)
     {
-        $this->redirectIfNotLoggedIn();
-
         $request->validate([
             'username' => 'required|unique:users',
             'firstname' => 'required',
             'lastname' => 'required',
             'email' => 'required',
             'lastname' => 'required',
-            'password' => 'required',
         ]);
 
         $user = new User;
@@ -42,7 +38,7 @@ class AdminUserController extends Controller
         $user->firstname = $request->firstname;
         $user->lastname = $request->lastname;
         $user->email = $request->email;
-        $user->password = Hash::make($request->password);
+        $user->password = Hash::make($this->default_password);
 
         $user->save();
 
@@ -51,32 +47,25 @@ class AdminUserController extends Controller
 
     public function edit(User $user)
     {
-        $this->redirectIfNotLoggedIn();
-
         return view('admin.users.edit', compact('user'));
     }
 
     public function update(Request $request, $id)
     {
-        $this->redirectIfNotLoggedIn();
-
         $request->validate([
-            'username' => 'required',
+            'username' => 'required|exists:users',
             'firstname' => 'required',
             'lastname' => 'required',
             'email' => 'required',
             'lastname' => 'required',
-            'password' => 'required',
         ]);
 
         $user = User::findOrFail($id);
-        // $sql = User::where('username', $request->username)->get();
-        // return count($sql);
         $user->username = $request->username;
         $user->firstname = $request->firstname;
         $user->lastname = $request->lastname;
         $user->email = $request->email;
-        $user->password = Hash::make($request->password);
+        $user->password = Hash::make($this->default_password);
 
         $user->save();
 
@@ -85,18 +74,10 @@ class AdminUserController extends Controller
 
     public function destroy(Request $request, $id)
     {
-        $this->redirectIfNotLoggedIn();
-
         $user = User::find($id);
+
         $user->delete();
 
         return redirect()->action('AdminUserController@index')->with('success', 'User successfully deleted');
-    }
-
-    public function redirectIfNotLoggedIn()
-    {
-        if (!Auth::user()) {
-            die(redirect()->action('PostController@index'));
-        }
     }
 }

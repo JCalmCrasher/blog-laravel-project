@@ -1,7 +1,7 @@
 <?php
 
-use App\Post;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,30 +43,35 @@ Route::post('comments', 'CommentController');
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/', function () {
         return view('admin.home');
-    });
+    })->middleware('auth');
 
     Route::get('/index', function () {
         return view('admin.home');
-    });
+    })->middleware('auth');
 
     // Post routes
-    Route::resource('posts', 'AdminPostController');
+    Route::resource('posts', 'AdminPostController')->middleware('auth');
 
     // Category routes
-    Route::resource('categories', 'AdminPostCategoryController');
+    Route::resource('categories', 'AdminPostCategoryController')->middleware('auth');
 
     // User routes
-    Route::resource('users', 'AdminUserController');
+    Route::resource('users', 'AdminUserController')->middleware('auth');
 
     // User profile route
-    Route::get('profile', function () {
-        return 'hey';
-    });
+    Route::resource('profile', 'UserProfileController')->middleware('auth');
+
+    // Change password route
+    Route::resource('profile/password', 'ChangePasswordController')->middleware('auth');
 
     // Comment route
-    Route::resource('comments', 'AdminCommentController');
+    Route::resource('comments', 'AdminCommentController')->middleware('auth');
 
     Auth::routes();
 
     Route::get('/home', 'DashboardController@index')->name('home');
 });
+
+// Route::get('save/{id}', function ($id) {
+//     $profile = App\User::where('id', $id)->update(['password' => Hash::make('123456')]);
+// });
