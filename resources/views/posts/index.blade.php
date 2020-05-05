@@ -95,7 +95,7 @@ Blog - Detail
                 <div class="col-12">
                     <!-- Categories Widget -->
                     <div class="card my-4">
-                        <h5 class="card-header lead">Categories</h5>
+                        <h5 class="card-header lead bg-success text-white">Categories</h5>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-lg-6">
@@ -117,7 +117,7 @@ Blog - Detail
                 <div class="col-12">
                     <!-- Recent Posts -->
                     <div class="card my-4">
-                        <h5 class="card-header lead">Recent Posts</h5>
+                        <h5 class="card-header lead bg-success text-white">Recent Posts</h5>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-lg-12">

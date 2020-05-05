@@ -35,7 +35,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" href="/index">Home
               <span class="sr-only">(current)</span>
             </a>
@@ -47,7 +47,7 @@
             <a class="nav-link" href="/services">Services</a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('home') }}" class="text-white btn btn-info">Login</a>
+            <a href="{{ route('home') }}" class="text-white btn btn-primary">Login</a>
           </li>
         </ul>
       </div>
