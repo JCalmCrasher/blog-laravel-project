@@ -27,7 +27,7 @@ class ChangePasswordController extends Controller
         if (Hash::check($request->current_password, $profile->get()[0]->password)) {
             $profile->password = Hash::make($request->password);
 
-            $action = redirect()->action('ChangePasswordController@edit', [$id])->with('success', 'Password updated successfully');
+            $action = redirect()->action('ChangePasswordController@edit')->with('success', 'Password updated successfully');
 
             $profile->save();
         } else {

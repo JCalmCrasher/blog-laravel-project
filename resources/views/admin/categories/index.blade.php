@@ -46,8 +46,8 @@ Categories
                                 <td>
                                     <a class="btn btn-success btn-sm" href="{{ "categories/$category->id/edit" }}">Edit</a>
                                     <a class="btn btn-danger btn-sm" href="categories/delete" onclick="event.preventDefault();
-                                    document.getElementById('delete-form').submit();">Delete</a>
-                                    <form id="delete-form" action="{{ url("admin/categories/$category->id") }}" method="POST"
+                                    document.getElementById('{{ $category->id }}-form').submit();">Delete</a>
+                                    <form id="{{ $category->id }}-form" action="{{ url("admin/categories/$category->id") }}" method="POST"
                                         style="display: none;">
                                         @method('DELETE')
                                         @csrf

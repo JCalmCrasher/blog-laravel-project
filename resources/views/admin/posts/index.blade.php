@@ -48,8 +48,8 @@ Posts
                                 <td>
                                     <a class="btn btn-success btn-sm" href="{{ "posts/$post->id/edit" }}">Edit</a>
                                     <a class="btn btn-danger btn-sm" href="posts/delete" onclick="event.preventDefault();
-                                    document.getElementById('delete-form').submit();">Delete</a>
-                                    <form id="delete-form" action="{{ url("admin/posts/$post->id") }}" method="POST"
+                                    document.getElementById('{{ $post->id }}-form').submit();">Delete</a>
+                                    <form id="{{ $post->id }}-form" action="{{ url("admin/posts/$post->id") }}" method="POST"
                                         style="display: none;">
                                         @method('DELETE')
                                         @csrf

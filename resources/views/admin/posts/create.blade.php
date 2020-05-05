@@ -23,8 +23,17 @@ Post
                     </ul>
                 </div>
                 @endif
-                <form action="{{ url('admin/posts/') }}" method="post">
+                <form action="{{ url('admin/posts/') }}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="post-image">Select featured image</label>
+                                <input type="file" {{ old('post_image') }} id="post-image" name="post_image"
+                                    class="form-control">
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
@@ -47,7 +56,7 @@ Post
                                 <label for="category">Enter Post Category</label>
                                 <select id="category" name="category" class="form-control" {{ old('category') }}>
                                     @foreach ($posts as $post)
-                                        <option value="{{ $post->category }}">{{ $post->category }}</option>
+                                    <option value="{{ $post->category }}">{{ $post->category }}</option>
                                     @endforeach
                                 </select>
                             </div>

@@ -15,7 +15,7 @@ Larablog - Home
 
             <!-- Blog Post -->
             <div class="card mb-4">
-                <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap" />
+                <img class="img-fluid rounded" src="{{ asset('storage/'.$post->post_image) }}" alt="{{ $post->title }}" />
                 <div class="card-body">
                     <h2 class="card-title lead">
                         <a href="posts/{{ $post->id }}">{{ $post->post_excerpt }}</a>
@@ -67,7 +67,7 @@ Larablog - Home
                         <h5 class="card-header lead">Recent Posts</h5>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-lg-12">
                                     <ul class="list-unstyled mb-0">
                                         @foreach($recentPosts as $recentPost)
                                         <li>

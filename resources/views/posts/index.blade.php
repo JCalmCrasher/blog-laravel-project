@@ -26,7 +26,7 @@ Blog - Detail
             <p>Posted on {{ date('F d, Y', strtotime($post->created_at)) }}</p>
 
             <!-- Preview Image -->
-            <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
+            <img class="img-fluid rounded" src="{{ asset('storage/'.$post->post_image) }}" alt="">
 
             <hr>
 

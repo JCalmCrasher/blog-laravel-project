@@ -23,12 +23,19 @@ Post
                     </ul>
                 </div>
                 @endif
-                <form action="{{ url("admin/posts/$post->id") }}" method="post">
+                <form action="{{ url("admin/posts/$post->id") }}" method="POST" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
                     <input type="text" {{ old('post_id') }} id="post-id" name="post_id" class="form-control"
                         value="{{ $post->id }}" hidden>
                     <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="post-image">Select featured image</label>
+                                <input type="file" {{ old('post_image') }} id="post-image" name="post_image"
+                                    class="form-control">
+                            </div>
+                        </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="post-title">Enter Post Title</label>

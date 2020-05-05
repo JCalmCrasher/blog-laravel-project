@@ -30,12 +30,16 @@ class AdminPostController extends Controller
             'category' => 'required',
         ]);
 
+        // file path
+        $path = $request->file('post_image')->store('posts');
+
         $post = new Post;
-        $post->post_title = request('post_title');
-        $post->post_excerpt = request('post_excerpt');
-        $post->post_body = request('post_body');
-        $post->category = request('category');
+        $post->post_title = $request->post_title;
+        $post->post_excerpt = $request->post_excerpt;
+        $post->post_body = $request->post_body;
+        $post->category = $request->category;
         $post->creator = Auth::user()->username;
+        $post->post_image = $path;
 
         $post->save();
 
@@ -61,12 +65,17 @@ class AdminPostController extends Controller
             'category' => 'required',
         ]);
 
+        // file path
+        $path = $request->file('post_image')->store('posts');
+
         $post = Post::find($id);
+
         $post->post_title = $request->post_title;
         $post->post_excerpt = $request->post_excerpt;
         $post->post_body = $request->post_body;
         $post->category = $request->category;
         $post->creator = Auth::user()->username;
+        $post->post_image = $path;
 
         $post->save();
 
