@@ -16,6 +16,7 @@ class CreateCategoryTable extends Migration
         Schema::create('category', function (Blueprint $table) {
             $table->id();
             $table->string('category')->unique();
+            $table->string('creator');
             $table->foreign('creator')->references('username')->on('users');
             $table->timestamps();
         });
