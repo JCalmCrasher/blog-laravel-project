@@ -13,7 +13,7 @@ class PostCategoryTableSeeder extends Seeder
     {
         App\PostCategory::create([
             'category' => 'Space',
-            'creator' => 'Joshua',
+            'creator' => 'joshua',
         ]);
     }
 }

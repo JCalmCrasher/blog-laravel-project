@@ -16,6 +16,7 @@ class PostTableSeeder extends Seeder
             'post_title' =>  'No other framework like Laravel!',
             'post_excerpt'  =>  'The best PHP framework',
             'post_body'  =>  'No other framework like Laravel!; The best PHP framework',
+            'category'=>'Space',
             'creator'  =>  'Joshua',
         ]);
     }
