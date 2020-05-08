@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -72,6 +73,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/home', 'DashboardController@index')->name('home');
 });
 
-Route::get('save/{id}', function ($id) {
-    $profile = App\User::where('id', $id)->update(['password' => Hash::make('123456')]);
+Route::get('save', function () {
+    $profile = App\User::where('username', 'joshua')->update(['password' => Hash::make('123456')]);
 });
