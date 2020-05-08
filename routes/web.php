@@ -72,7 +72,3 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::get('/home', 'DashboardController@index')->name('home');
 });
-
-Route::get('save', function () {
-    $profile = App\User::where('username', 'joshua')->update(['password' => Hash::make('123456')]);
-});
