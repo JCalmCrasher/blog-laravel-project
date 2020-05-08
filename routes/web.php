@@ -68,6 +68,7 @@ Route::group(['prefix' => 'admin'], function () {
     // Comment route
     Route::resource('comments', 'AdminCommentController')->middleware('auth');
 
+    
     Auth::routes();
 
     Route::get('/home', 'DashboardController@index')->name('home');
