@@ -18,7 +18,7 @@ class CreateCommentsTable extends Migration
             $table->integer('post_id');
             $table->string('commenter_name');
             $table->string('content');
-            $table->char('approved', 1);
+            $table->char('approved', 0)->default(1);
             $table->timestamps();
         });
     }
