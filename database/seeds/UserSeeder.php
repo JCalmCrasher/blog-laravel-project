@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
             'username'  =>  'joshua',
             'email'     =>  'josh001pro@gmail.com',
             'password' =>  Hash::make('123456'),
+            'profile_pic' => '',
             'remember_token' =>  "Hello",
         ]);
     }
